@@ -2,9 +2,8 @@
   "name": "Node-Boilerplate",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=development NODE_APP=perler node app.js",
-    "staging": "NODE_ENV=staging NODE_APP=app node app.js",
-    "production": "NODE_ENV=production NODE_APP=app node app.js"
+    "start": "NODE_ENV=production NODE_APP=perler node app.js",
+    "staging": "NODE_ENV=staging NODE_APP=app node app.js"
   },
   "engines": {
     "node": "6"

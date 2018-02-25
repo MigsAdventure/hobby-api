@@ -1,4 +1,4 @@
-require('dotenv').config({ silent: true });
+// require('dotenv').config({ silent: true });
 // CONSTANTS
 
 const PORT = process.env.PORT || 8000;
