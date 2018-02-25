@@ -6,6 +6,9 @@
     "staging": "NODE_ENV=staging NODE_APP=app node app.js",
     "production": "NODE_ENV=production NODE_APP=app node app.js"
   },
+  "engines": {
+    "node": "6"
+  },
   "dependencies": {
     "connect-mongo": "^2.0.0",
     "dotenv": "^5.0.0",
