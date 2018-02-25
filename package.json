@@ -2,14 +2,15 @@
   "name": "Node-Boilerplate",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=development NODE_APP=app node server/app.js",
-    "staging": "NODE_ENV=staging NODE_APP=app node server/app.js",
-    "production": "NODE_ENV=production NODE_APP=app node server/app.js"
+    "start": "NODE_ENV=development NODE_APP=perler node app.js",
+    "staging": "NODE_ENV=staging NODE_APP=app node app.js",
+    "production": "NODE_ENV=production NODE_APP=app node app.js"
   },
   "dependencies": {
     "connect-mongo": "^2.0.0",
+    "dotenv": "^5.0.0",
     "express": "^4.15.3",
-    "mongoose": "^4.12.3",
+    "mongoose": "^4.13.11",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
@@ -20,6 +21,7 @@
     "jsdom": "^9.12.0",
     "mkdirp": "^0.5.1",
     "mochawesome": "^2.3.1",
+    "morgan": "^1.9.0",
     "nock": "^9.0.25",
     "npm": "^2.1.12",
     "npm-run-all": "^4.1.1"

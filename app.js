@@ -2,21 +2,26 @@ require('dotenv').config({ silent: true });
 // CONSTANTS
 
 const PORT = process.env.PORT || 8000;
-const MONGO_URI = process.env.MONGOLAB_URI || 'mongodb://localhost/appDb';
+const ENV = process.env.NODE_ENV;
+const envConfig = require('./config/environment');
+const site_origin = envConfig.SITE_URL;
+const DB_URI = envConfig.DB_URI;
+const morgan = require('morgan');
 // REQUIRES
 const bodyParser = require('body-parser');
 const express = require('express');
-const morgan = require('morgan');
-const path = require('path');
 
 // INITIALIZE SERVER
 const app = express();
 const server = require('http').createServer(app);
 
-require('mongoose').connect(MONGO_URI, (err) => {
+
+// MONGO
+require('mongoose').connect(DB_URI, (err) => {
   if (err) throw err;
-  console.log(`MongoDB connected to ${MONGO_URI}`);
+  console.log(`MongoDB connected to ${DB_URI}`);
 });
+
 
 server.listen(PORT, (err) => {
   console.log(err || `Express listening on port ${PORT}`);
@@ -26,8 +31,6 @@ server.listen(PORT, (err) => {
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../public')));
-require('./config/webpack')(app);
 
 // ERROR/SEND HANDLE
 app.use((req, res, next) => {
@@ -37,8 +40,3 @@ app.use((req, res, next) => {
 
 // ROUTING
 app.use('/api', require('./routes/api'));
-
-// ALLOW REACT ROUTING
-app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
