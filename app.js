@@ -6,7 +6,6 @@ const ENV = process.env.NODE_ENV;
 const envConfig = require('./config/environment');
 const site_origin = envConfig.SITE_URL;
 const DB_URI = envConfig.DB_URI;
-const morgan = require('morgan');
 // REQUIRES
 const bodyParser = require('body-parser');
 const express = require('express');
