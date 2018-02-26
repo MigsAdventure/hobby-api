@@ -11,7 +11,7 @@ let PORT = '';
 switch(CURR_APP) {
   case 'perler': {
     // temporary url
-    SITE_URI = 'still-spire-83012.herokuapp.com/';
+    SITE_URI = 'migsadventure.github.io';
   }break;
   case 'accessdriven': {
     SITE_URI = 'accessdriven.com';
@@ -20,7 +20,6 @@ switch(CURR_APP) {
 }
 
 if(process.env.NODE_ENV !== "production") {
-  SITE_PROTOCOL = '';
   SITE_URI = 'localhost';
   PORT = ':8000';
 }
