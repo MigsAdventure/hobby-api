@@ -20,7 +20,7 @@ switch(CURR_APP) {
 }
 
 if(process.env.NODE_ENV !== "production") {
-  SITE_URI = 'localhost';
+  SITE_URI = '127.0.0.1';
   PORT = ':8000';
 }
 
