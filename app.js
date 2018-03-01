@@ -43,6 +43,7 @@ require('mongoose').connect(DB_URI, (err) => {
 
 server.listen(PORT, (err) => {
   console.log(err || `Express listening on port ${PORT}`);
+  console.log('Current ENV: ' + process.env.NODE_ENV);
 });
 
 // MIDDLEWARE
