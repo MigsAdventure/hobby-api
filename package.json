@@ -4,7 +4,8 @@
   "scripts": {
     "start":"if test \"$NODE_ENV\" = \"production\" ; then npm run production ; else npm run dev; fi ",
     "dev": "NODE_ENV=dev NODE_APP=app node app.js",
-    "production": "NODE_ENV=production node app.js"
+    "production": "NODE_ENV=production node app.js",
+    "deploy-heroku": "git push heroku master"
   },
   "engines": {
     "node": "6"
