@@ -1,6 +1,7 @@
 "use strict"
 const router = require('express').Router();
 
+
 // perler route
 router.use('/perler', require('./perler/perler'));
 
@@ -8,10 +9,9 @@ router.use('/perler', require('./perler/perler'));
 router.use('/slack', require('./slack/slack'));
 
 // api endpoint
-router.route('/')
+router.route('/wakeme')
 .get((req, res) => {
-  console.log('received');
-res.send('THIS WORKS');
+  res.send("I'm awake!");
 });
 
 module.exports = router;
