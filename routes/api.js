@@ -8,6 +8,9 @@ router.use('/perler', require('./perler/perler'));
 // slack route
 router.use('/slack', require('./slack/slack'));
 
+// status route
+router.use('/status', require('./status/status'));
+
 // api endpoint
 router.route('/wakeme')
 .get((req, res) => {
