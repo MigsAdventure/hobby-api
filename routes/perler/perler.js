@@ -11,13 +11,12 @@ router.route('/fetch-user-perlers')
   })
 
     .post((req, res) => {
-        User.userExists(req.body.name)
+        User.userExists(req.body.email)
             .then((data) => {
-                console.log('this should work');
+                console.log('data: ', data);
                 res.send(data);
             })
             .catch((err) => {
-                console.log('ERRORS HERE');
                 res.status(400).send(err);
             });
 });
