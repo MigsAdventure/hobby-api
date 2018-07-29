@@ -1,25 +1,25 @@
 // create a model from user
 const User = require('../../schema/Perler/user');
 
+// gets a list of all users object
+exports.listAllUsers = (cb) => {
+    return User.find({}, (err, users) => {
+        if(err) {
+            cb(err);
+        }
+        cb(null, users);
+    });
+};
+
 // checks if user exists in db
- exports.userExists = (auth_email) => {
-    console.log('auth_email', auth_email);
+ exports.addUser = (req) => {
 // look through all current users in db for user by name
     const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com'];
-    const allowedUsers = users.includes(auth_email);
+    const allowedUsers = users.includes(req.email);
 
     if (allowedUsers) {
-        return User.find({ email: auth_email })
-            .then((dbUser) => {
-                if (dbUser.length) {
-                    return dbUser;
-                } else {
-                    // create a new user
-                    return User.create({
-                        email: auth_email,
-                    })
-                }
-            })
+                // create a new user
+        return User.create(req)
             .then((sendUser) => {
                 return sendUser;
             })
@@ -28,9 +28,18 @@ const User = require('../../schema/Perler/user');
             });
     } else {
         return new Promise((resolve, reject) => {
-           resolve(auth_email + ' IS NOT AUTHORIZED'); // fulfilled
+           resolve(req.email + ' IS NOT AUTHORIZED'); // fulfilled
             // or
             reject("THERE WAS AN ERROR ON USER EXISTS CHECK"); // rejected
         });
     }
 };
+
+ exports.userCards = (user_id, cb) => {
+     return User.findById(user_id)
+         .populate('perler_cards')
+         .then((cards) => {
+             cb(null, cards);
+         });
+ };
+

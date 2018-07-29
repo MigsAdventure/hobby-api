@@ -6,6 +6,6 @@ const perlerSchema = new Schema({
     owner: [{ type: Schema.Types.ObjectId, ref: 'user' }],
 });
 
-const perler = mongoose.model('perler', perlerSchema);
+const card = mongoose.model('card', perlerSchema);
 
-module.exports = perler;
+module.exports = card;
