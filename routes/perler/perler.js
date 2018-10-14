@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 const router = require('express').Router();
 const User = require('../../models/Perler/User');
 const Card = require('../../models/Perler/card');
