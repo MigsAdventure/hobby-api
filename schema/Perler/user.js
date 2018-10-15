@@ -9,9 +9,9 @@ const userSchema = new Schema({
     name: { type: String },
     imageUrl: { type: String },
     googleId: { type: String },
-    perler_cards: [{ type: Schema.Types.ObjectId, ref: 'perler' }],
+    perler_cards: [{ type: Schema.Types.ObjectId, ref: 'Perler' }],
 });
 
-const user = mongoose.model('user', userSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = user;
+module.exports = User;

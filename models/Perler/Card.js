@@ -1,6 +1,6 @@
 // create a model from user
-const Card = require('../../schema/Perler/card');
-const User = require('../../schema/Perler/user');
+const Card = require('../../schema/Perler/Card');
+const User = require('../../schema/Perler/User');
 
 // gets a list of all users object
 exports.listAllCards = (cb) => {
@@ -38,16 +38,10 @@ exports.addCard = (req) => {
             let card_id;
             return Card.create({}, req)
                 .then((card) => {
-                    console.log('card: ', card);
                     card_id = card._id;
-                    return User.find({googleId: req.googleId});
+                    return User.findByIdAndUpdate(req.params.googleId, { $set: { perler_cards: card_id } });
+                    // return User.find({googleId: req.googleId});
                 })
-                .then((user) => {
-                    console.log('USER: ', user);
-                    user[0].perler_cards.push(card_id);
-                    return user.save();
-                })
-                .then(() => User.find({googleId: req.googleId}).populate('owner'))
                 .then(user => (user));
 
 

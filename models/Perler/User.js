@@ -1,5 +1,5 @@
 // create a model from user
-const User = require('../../schema/Perler/user');
+const User = require('../../schema/Perler/User');
 
 // gets a list of all users object
 exports.listAllUsers = (cb) => {

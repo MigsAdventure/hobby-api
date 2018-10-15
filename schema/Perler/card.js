@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const perlerSchema = new Schema({
     url: { type: String },
-    owner: [{ type: Schema.Types.ObjectId, ref: 'user' }],
+    owner: String
 });
 
-const card = mongoose.model('card', perlerSchema);
+const Card = mongoose.model('Card', perlerSchema);
 
-module.exports = card;
+module.exports = Card;

@@ -1,8 +1,9 @@
 "use strict";
 const router = require('express').Router();
 const User = require('../../models/Perler/User');
-const Card = require('../../models/Perler/card');
+const Card = require('../../models/Perler/Card');
 
+module.exports = router;
 
 router.route('/user')
     // get current users with their perler beads
@@ -59,10 +60,14 @@ router.route('/card')
 });
 
 router.route('/card/:id')
-    .get((req, res) => {
-        Card.cardById = (user_cards) => {
-            res.send(user_cards);
-        }
+    .put((req, res) => {
+        Card.findOne({ _id: req.params.id })
+            .then((card) => {
+                let current_owner = card.owner;
+                return Card.FindOneAndUpdate(req.params.id, { $set: { owner: current_owner } });
+            })
+            .then(message => res.send(message))
+            .catch(err => res.status(400).send(err));
     });
 
 
