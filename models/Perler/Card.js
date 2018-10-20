@@ -16,8 +16,8 @@ exports.listAllCards = (cb) => {
 exports.addCard = (req) => {
 // look through all current users in db for user by name
     const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com'];
-    const allowedUsers = users.includes(req.email);
-
+    const allowedUsers = users.includes(req.body.email);
+    console.log(req);
     if (allowedUsers) {
         // create a new user
         // return User.findById(req._id)
@@ -34,18 +34,23 @@ exports.addCard = (req) => {
         //     .catch((err) => {
         //         return err;
         //     });
-
-            let card_id;
-            return Card.create({}, req)
-                .then((card) => {
-                    card_id = card._id;
-                    return User.findByIdAndUpdate(req.params.googleId, { $set: { perler_cards: card_id } });
-                    // return User.find({googleId: req.googleId});
-                })
-                .then(user => (user));
-
-
-
+       return User.findById(req.query.id)
+            .then(user => {
+                if (!user) {
+                    return res.status(404).json({
+                        message: "User not found"
+                    });
+                }
+                return Card.create(req.body)
+                    .then((card) => {
+                        user.perlerCards.push(card);
+                        return user;
+                    })
+            })
+            .then(result => {
+                result.save();
+                return result;
+            })
     } else {
         return new Promise((resolve, reject) => {
             resolve(req.email + ' IS NOT AUTHORIZED'); // fulfilled
@@ -53,6 +58,16 @@ exports.addCard = (req) => {
             reject("THERE WAS AN ERROR ON USER EXISTS CHECK"); // rejected
         });
     }
+};
+
+exports.deleteCard = (params) => {
+    return User.findById(params.id)
+        .then((user) => {
+            user.perlerCards.pull(params.cardId);
+            user.save();
+            Card.find({ url: 'google.com' }).remove();
+            return user
+        });
 };
 
 exports.cardById = (card_id) => {

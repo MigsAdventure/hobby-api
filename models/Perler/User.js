@@ -16,7 +16,6 @@ exports.listAllUsers = (cb) => {
 // look through all current users in db for user by name
     const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com'];
     const allowedUsers = users.includes(req.email);
-
     if (allowedUsers) {
                 // create a new user
         return User.create(req)
@@ -35,11 +34,18 @@ exports.listAllUsers = (cb) => {
     }
 };
 
- exports.userCards = (user_id, cb) => {
-     return User.findById(user_id)
-         .populate('perler_cards')
-         .then((cards) => {
-             cb(null, cards);
-         });
+ exports.getuserCards = (user_id, cb) => {
+     User.findById(user_id)
+         .populate('perlerCards')
+         .then((user) => {
+             return user;
+         })
+         .then(data => {
+             cb(null, data);
+         })
+              .catch((err) => {
+                  cb(err, null);
+                  return err;
+              });
  };
 
