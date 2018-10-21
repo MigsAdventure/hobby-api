@@ -2,6 +2,8 @@
 const router = require('express').Router();
 const User = require('../../models/Perler/User');
 const Card = require('../../models/Perler/Card');
+// const Card = require('../../schema/Perler/Card');
+// const User = require('../../schema/Perler/User');
 
 module.exports = router;
 
@@ -28,12 +30,19 @@ router.route('/user')
 
 router.route('/user/:id')
     .get((req, res) => {
-        User.getUserCards = (err, user_cards) => {
-            if (err) {
-                err.status(400).send(err);
-            }
-            res.send(user_cards);
-        }
+        User.getuserCards(req.params.id, (err, user) => {
+            console.log('user : ', user);
+            if (err) res.send(err);
+            res.send(user);
+        })
+    });
+
+router.route('/user/:id/card/:cardId')
+    .delete((req, res) => {
+        Card.deleteCard(req.params)
+            .then((card) => {
+                res.send(card);
+            });
     });
 
 // start of perler cards
@@ -46,28 +55,24 @@ router.route('/card')
             }
             res.send(users);
         });
-  })
-    // get user email and add
+    })
+
     .post((req, res) => {
-        console.log(req.body);
-        Card.addCard(req.body)
+        Card.addCard(req)
             .then((data) => {
                 res.send(data);
             })
             .catch((err) => {
                 res.status(400).send(err);
             });
-});
+    });
 
 router.route('/card/:id')
-    .put((req, res) => {
-        Card.findOne({ _id: req.params.id })
+    .delete((req, res) => {
+        Card.deleteCard(req.params.id)
             .then((card) => {
-                let current_owner = card.owner;
-                return Card.FindOneAndUpdate(req.params.id, { $set: { owner: current_owner } });
-            })
-            .then(message => res.send(message))
-            .catch(err => res.status(400).send(err));
+                res.send(card);
+            });
     });
 
 
