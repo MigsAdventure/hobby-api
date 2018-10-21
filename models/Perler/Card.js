@@ -73,7 +73,7 @@ exports.listAllCards = (cb) => {
 exports.addCard = (req) => {
     console.log(req.params.id);
 // look through all current users in db for user by name
-    const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com'];
+    const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com', 'kazandra542@gmail.com'];
     const allowedUsers = users.includes(req.body.email);
     console.log(typeof req.params.id);
     if (allowedUsers) {

@@ -14,7 +14,7 @@ exports.listAllUsers = (cb) => {
 // checks if user exists in db
  exports.addUser = (req) => {
 // look through all current users in db for user by name
-    const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com'];
+    const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com', 'kazandra542@gmail.com'];
     const allowedUsers = users.includes(req.email);
     if (allowedUsers) {
                 // create a new user
