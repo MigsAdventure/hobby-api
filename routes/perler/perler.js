@@ -57,6 +57,17 @@ router.route('/card')
         });
     })
 
+    // .post((req, res) => {
+    //     Card.addCard(req)
+    //         .then((data) => {
+    //             res.send(data);
+    //         })
+    //         .catch((err) => {
+    //             res.status(400).send(err);
+    //         });
+    // });
+
+router.route('/card/:id')
     .post((req, res) => {
         Card.addCard(req)
             .then((data) => {
@@ -65,9 +76,8 @@ router.route('/card')
             .catch((err) => {
                 res.status(400).send(err);
             });
-    });
+    })
 
-router.route('/card/:id')
     .delete((req, res) => {
         Card.deleteCard(req.params.id)
             .then((card) => {
