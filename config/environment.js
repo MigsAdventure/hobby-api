@@ -24,7 +24,7 @@ let PORT = '';
 if(process.env.NODE_ENV !== "production") {
   // SITE_URI = '127.0.0.1';
   // PORT = ':8000';
-   SITE_URL = 'http://127.0.0.1:8000'
+   SITE_URL = 'http://local.perler-styles.com:3000'
 }
 
 // const SITE_URL = SITE_PROTOCOL + SITE_URI + PORT;
