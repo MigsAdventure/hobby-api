@@ -37,16 +37,24 @@ exports.addCard = (req) => {
        return User.findById(req.query.id)
             .then(user => {
                 if (!user) {
-                    return res.status(404).json({
-                        message: "User not found"
-                    });
+                    // create a new user
+                    return User.create(req.body.user_info)
+                        .then((sendUser) => {
+                            return sendUser;
+                        })
+                        .catch((err) => {
+                            return err;
+                        });
                 }
-                return Card.create(req.body)
-                    .then((card) => {
-                        user.perlerCards.push(card);
-                        return user;
-                    })
+                return user;
             })
+           .then(user => {
+               return Card.create(req.body.card_info)
+                   .then((card) => {
+                       user.perlerCards.push(card);
+                       return user;
+                   })
+           })
             .then(result => {
                 result.save();
                 return result;
