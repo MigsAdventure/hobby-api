@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
+mongoose.set('debug', true);
 
 const Schema = mongoose.Schema;
 const cardSchema = new Schema({
     url: { type: String },
-    owner: String,
-    user: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    user: { type: String },
 });
 
-const Card = mongoose.model('Card', cardSchema);
+const Card = mongoose.model('Card', cardSchema, 'cards');
 
 module.exports = Card;
