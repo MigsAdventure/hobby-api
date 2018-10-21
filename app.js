@@ -19,7 +19,10 @@ const server = require('http').createServer(app);
 // handle cors
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', site_origin);
+    const origin = req.headers.origin;
+    if(site_origin.indexOf(origin) > -1){
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     res.header('Access-Control-Allow-Methods', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     //intercepts OPTIONS method
