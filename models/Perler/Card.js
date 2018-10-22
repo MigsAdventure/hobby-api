@@ -70,14 +70,15 @@ exports.listAllCards = (cb) => {
 //     }
 // };
 
-exports.addCard = (req) => {
-    console.log(req.params.id);
+exports.addCard = (req, cb) => {
 // look through all current users in db for user by name
     const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com', 'kazandra542@gmail.com'];
     const allowedUsers = users.includes(req.body.email);
-    console.log(typeof req.params.id);
     if (allowedUsers) {
-       return Card.update({ _id: req.params.id }, { '$set': { user: req.body.user_name } })
+       return Card.findByIdAndUpdate(req.params.id, (card) => {
+            card.user_name = req.body.user_name
+           return card;
+       })
             .then(card => {
                 console.log('card: ', card);
                 if (!card) {
@@ -87,12 +88,14 @@ exports.addCard = (req) => {
                 return card;
             })
             .then(result => {
+                console.log('RESULTTTT!!!!: ', result);
                 result.save();
                 return result;
+                 // cb(null, result);
             })
     } else {
         return new Promise((resolve, reject) => {
-            resolve(req.email + ' IS NOT AUTHORIZED'); // fulfilled
+            resolve(req.body.email + ' IS NOT AUTHORIZED'); // fulfilled
             // or
             reject("THERE WAS AN ERROR ON USER EXISTS CHECK"); // rejected
         });
