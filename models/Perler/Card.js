@@ -15,69 +15,13 @@ exports.listAllCards = (cb) => {
     });
 };
 
-// checks if user exists in db
-// exports.addCard = (req) => {
-// // look through all current users in db for user by name
-//     const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com'];
-//     const allowedUsers = users.includes(req.body.email);
-//     if (allowedUsers) {
-//         // create a new user
-//         // return User.findById(req._id)
-//         //     .populate('cards')
-//         //         .then(cards => {
-//         //             return Card.create(cards)
-//         //                 .then((createdCard) => {
-//         //                     return createdCard;
-//         //                 })
-//         //                 .catch((err) => {
-//         //                     return err;
-//         //                 });
-//         //         })
-//         //     .catch((err) => {
-//         //         return err;
-//         //     });
-//        return User.findById(req.query.id)
-//             .then(user => {
-//                 if (!user) {
-//                     // create a new user
-//                     return User.create(req.body.user_info)
-//                         .then((sendUser) => {
-//                             return sendUser;
-//                         })
-//                         .catch((err) => {
-//                             return err;
-//                         });
-//                 }
-//                 return user;
-//             })
-//            .then(user => {
-//                return Card.create(req.body.card_info)
-//                    .then((card) => {
-//                        user.perlerCards.push(card);
-//                        return user;
-//                    })
-//            })
-//             .then(result => {
-//                 result.save();
-//                 return result;
-//             })
-//     } else {
-//         return new Promise((resolve, reject) => {
-//             resolve(req.email + ' IS NOT AUTHORIZED'); // fulfilled
-//             // or
-//             reject("THERE WAS AN ERROR ON USER EXISTS CHECK"); // rejected
-//         });
-//     }
-// };
-
-exports.addCard = (req, cb) => {
+exports.addCard = (req) => {
 // look through all current users in db for user by name
-    const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com', 'kazandra542@gmail.com'];
-    const allowedUsers = users.includes(req.body.email);
+    const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com', 'kazandra542@gmail.com', 'aheredia242@gmail.com'];
+    const allowedUsers = users.includes(req.body.email.toLowerCase());
     if (allowedUsers) {
        return Card.findByIdAndUpdate(req.params.id,{user: req.body.user_name}, {new: true})
             .then(card => {
-                console.log('card: ', card);
                 if (!card) {
                     // create a new user
                     return JSON.stringify({"error": "CARD DOES NOT EXIST"});
@@ -85,9 +29,7 @@ exports.addCard = (req, cb) => {
                 return card;
             })
             .then(result => {
-                console.log('RESULTTTT!!!!: ', result);
                 return result;
-                 // cb(null, result);
             })
     } else {
         return new Promise((resolve, reject) => {
@@ -97,8 +39,6 @@ exports.addCard = (req, cb) => {
         });
     }
 };
-
-
 
 exports.deleteCard = (params) => {
     return User.findById(params.id)
