@@ -75,10 +75,7 @@ exports.addCard = (req, cb) => {
     const users = ['migsub77@gmail.com', 'charinaisabel@gmail.com', 'kazandra542@gmail.com'];
     const allowedUsers = users.includes(req.body.email);
     if (allowedUsers) {
-       return Card.findByIdAndUpdate(req.params.id, (card) => {
-            card.user_name = req.body.user_name
-           return card;
-       })
+       return Card.findByIdAndUpdate(req.params.id,{user: req.body.user_name}, {new: true})
             .then(card => {
                 console.log('card: ', card);
                 if (!card) {
@@ -89,7 +86,6 @@ exports.addCard = (req, cb) => {
             })
             .then(result => {
                 console.log('RESULTTTT!!!!: ', result);
-                result.save();
                 return result;
                  // cb(null, result);
             })
