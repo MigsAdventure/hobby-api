@@ -71,6 +71,7 @@ router.route('/card/:id')
     .post((req, res) => {
         Card.addCard(req)
             .then((data) => {
+                console.log('data here: ', data);
                 res.send(data);
             })
             .catch((err) => {
