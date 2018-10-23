@@ -28,6 +28,7 @@ router.route('/user')
             });
 });
 
+
 router.route('/user/:id')
     .get((req, res) => {
         User.getuserCards(req.params.id, (err, user) => {
@@ -78,7 +79,15 @@ router.route('/card/:id')
                 res.status(400).send(err);
             });
     })
-
+    .put((req, res) => {
+        Card.removeCard(req)
+            .then((data) => {
+                res.send(data);
+            })
+            .catch((err) => {
+                res.status(400).send(err);
+            });
+    })
     .delete((req, res) => {
         Card.deleteCard(req.params.id)
             .then((card) => {
