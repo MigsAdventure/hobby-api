@@ -1,6 +1,6 @@
 // require('dotenv').config({ silent: true });
 // CONSTANTS
-
+require('dotenv').config();
 const PORT = process.env.PORT || 8000;
 const ENV = process.env.NODE_ENV;
 const envConfig = require('./config/environment');

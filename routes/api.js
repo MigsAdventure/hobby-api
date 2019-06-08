@@ -11,6 +11,9 @@ router.use('/slack', require('./slack/slack'));
 // status route
 router.use('/status', require('./status/status'));
 
+// status route
+router.use('/email', require('./email'));
+
 // api endpoint
 router.route('/wakeme')
 .get((req, res) => {
