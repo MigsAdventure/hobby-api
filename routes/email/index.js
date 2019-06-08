@@ -1,11 +1,6 @@
 "use strict"
 const router = require('express').Router();
-const axios = require('axios');
-
-
 const nodemailer = require("nodemailer");
-
-
 
 router.route('/portfolio-contact')
 .post((req, res) => {
@@ -21,18 +16,16 @@ router.route('/portfolio-contact')
   });
   mailOpts = {
     from: req.body.name + ' &lt;' + req.body.email + '&gt;',
-    to: "migsadventure@gmail.com",
-    subject: 'New message from contact form at tylerkrys.ca',
+    to: process.env.EMAIL_USER,
+    subject: 'New message from contact form at migpardo.com',
     text: `${req.body.name} (${req.body.email}) says: ${req.body.message}`
   };
   smtpTrans.sendMail(mailOpts, function (error, response) {
     if (error) {
-      console.log('ERROR: ', error);
-      res.send('contact-failure');
+      res.send('fail');
     }
     else {
-      console.log('RESPONSE: ', response);
-      res.send('contact-success');
+      res.send('success');
     }
   });
 });
