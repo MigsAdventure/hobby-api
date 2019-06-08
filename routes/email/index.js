@@ -22,10 +22,10 @@ router.route('/portfolio-contact')
   };
   smtpTrans.sendMail(mailOpts, function (error, response) {
     if (error) {
-      res.send('fail: ', error);
+      res.status(400).send(error)
     }
     else {
-      res.send('success: ', response);
+      res.status(200).send(response)
     }
   });
 });
