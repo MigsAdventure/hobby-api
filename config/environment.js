@@ -4,7 +4,7 @@ const ENV = process.env.NODE_ENV;
 const CURR_APP = process.env.NODE_APP;
 const DB_URI = process.env.DB_URI || `mongodb://localhost/${CURR_APP}`;
 
-let SITE_URL = ["http://www.codeandcoffeeoc.com", "http://perler.migsadventure.com", "https://migsadventure.com", "https://www.migpardo.com"];
+let SITE_URL = ["http://www.codeandcoffeeoc.com", "http://perler.migsadventure.com", "https://www.migsadventure.com", "https://www.migpardo.com"];
 let SITE_PROTOCOL = 'https://';
 let SITE_URI = '';
 let PORT = '';
