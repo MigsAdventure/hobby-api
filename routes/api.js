@@ -14,6 +14,9 @@ router.use('/status', require('./status/status'));
 // status route
 router.use('/email', require('./email'));
 
+// tdameritrade route
+router.use('/stock-wheel', require('./stock-wheel'));
+
 // api endpoint
 router.route('/wakeme')
 .get((req, res) => {
