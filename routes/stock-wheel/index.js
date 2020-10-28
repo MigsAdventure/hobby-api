@@ -24,7 +24,7 @@ https://developer.tdameritrade.com/content/simple-auth-local-apps
       'access_type': 'offline',
       'code': req.query.code, // get the code from url
       'client_id': process.env.TD_CLIENT_ID + "@AMER.OAUTHAP", // this client id comes from config vars
-      'redirect_uri': TD_REDIRECT_URL
+      'redirect_uri': process.env.TD_REDIRECT_URL
     }
   };
   
